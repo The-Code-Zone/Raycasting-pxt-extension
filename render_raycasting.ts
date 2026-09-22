@@ -695,7 +695,7 @@ namespace Render {
 
                 const lineHeight = (this.wallHeightInView / perpWallDist)
                 const drawEnd = lineHeight * this.viewZPos / this.tilemapScaleSize / fpx_scale;
-                const horizontBreak = 1 - this.viewZPos / this.tilemapScaleSize / fpx_scale;
+                const horizontBreak = 1 - this.viewZPos / this.tilemapScaleSize / fpx_scale / this._wallZScale;
                 if (perpWallDist !== lastDist && (texX !== lastTexX || mapX !== lastMapX || mapY !== lastMapY)) {//neighbor line of tex share same parameters
 
                     drawStart = drawEnd - lineHeight * (this._wallZScale);
@@ -713,7 +713,7 @@ namespace Render {
                 //if (x < SWHalf)
                 //    this.tempScreen.blitRow(x, drawStart, tex, texX, drawHeight)
                 //else
-                this.blitRowBreak(x, SHHalf + drawEnd - lineHeight, SHHalf + drawEnd, tex, texX, tex.height * horizontBreak)
+                this.blitRowBreak(x, drawStart, SHHalf + drawEnd, tex, texX, tex.height * horizontBreak)
 
                 this.dist[x] = perpWallDist
 
